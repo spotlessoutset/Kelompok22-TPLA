@@ -99,7 +99,7 @@ def main():
     print("\n--- Struktur Organisasi Kelas ---")
     organisasi.tampilkan_struktur()
     while True:
-        print(
+        print("\n"
             "========= Struktur Organisasi Kelas =========\n",
             "1. Tampilkan Struktur Organisasi\n",
             "2. Tambah Anggota\n",
@@ -111,6 +111,31 @@ def main():
         )
 
         pilihan = input("Masukkan pilihan: ")
+
+
+        # IF ELSE INPUT USER
+
+        if pilihan == "1":
+            organisasi.tampilkan_struktur()
+        elif pilihan == "2":
+            nama_atasan = input("Masukkan nama atasan: ")
+            nama_baru = input("Masukkan nama anggota baru: ")
+            jabatan_baru = input("Masukkan jabatan anggota baru: ")
+            organisasi.tambah_anggota(nama_atasan, nama_baru, jabatan_baru)
+        elif pilihan == "3":
+            nama_target = input("Masukkan nama anggota yang ingin dihapus: ")
+            organisasi.hapus_anggota(nama_target)
+        elif pilihan == "4":
+            nama_target = input("Masukkan nama anggota yang ingin dicari: ")
+            organisasi.cari_anggota(nama_target)
+        elif pilihan == "5":
+            simpan_file()
+        elif pilihan == "6":
+            buka_file()
+        elif pilihan == "0":
+            break
+        else:
+            print("Pilihan tidak valid!")
 
 def simpan_file():
     ...
