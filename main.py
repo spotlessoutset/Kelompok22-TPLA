@@ -1,18 +1,23 @@
-# class node
+# Class Node
+# Merepresentasikan satu anggota dalam struktur organisasi.
 class Anggota:
+    # Inisialisasi anggota dengan nama, jabatan, dan list bawahan kosong
     def __init__(self, nama, jabatan):
         self.nama = nama
         self.jabatan = jabatan
         self.bawahan = []
 
-# class struktur data
+# Class Struktur Data
+# Mengelola struktur organisasi kelas berbasis tree.
 class Struktur:
+    # Inisialisasi tree dengan root Ketua Kelas
     def __init__(self, nama_ketua):
         if nama_ketua:
             self.root = Anggota(nama_ketua, "Ketua Kelas")
         else:
             self.root = None
 
+    # Menampilkan seluruh struktur organisasi secara rekursif
     def tampilkan_struktur(self, node=None, tingkat=0):
         if self.root is None:
             print("Struktur organisasi kosong.")
@@ -27,6 +32,7 @@ class Struktur:
         for bawahan in node.bawahan:
             self.tampilkan_struktur(bawahan, tingkat + 1)
 
+    # Mencari node anggota berdasarkan nama secara rekursif
     def cari_bawahan(self, node, nama_target):
         if node is None:
             return None
@@ -39,6 +45,7 @@ class Struktur:
                 return hasil
         return None
 
+    # Mencari node parent (atasan langsung) dari anggota
     def cari_parent(self, node, nama_target):
         if node is None:
             return None
@@ -50,6 +57,7 @@ class Struktur:
                 return hasil
         return None
 
+    # Menambahkan anggota baru sebagai bawahan dari atasan
     def tambah_anggota(self, nama_atasan, nama_baru, jabatan_baru):
         atasan = self.cari_bawahan(self.root, nama_atasan)
         if atasan:
@@ -59,6 +67,7 @@ class Struktur:
         else:
             print(f"Gagal: Atasan dengan nama '{nama_atasan}' tidak ditemukan!")
 
+    # Menghapus anggota beserta seluruh bawahannya dari struktur
     def hapus_anggota(self, nama_target):
         if self.root is None:
             print("Struktur kosong.")
@@ -75,6 +84,7 @@ class Struktur:
         else:
             print(f"Anggota dengan nama '{nama_target}' tidak ditemukan!")
 
+    # Mencari dan menampilkan detail informasi anggota
     def cari_anggota(self, nama_target):
         hasil = self.cari_bawahan(self.root, nama_target)
         if hasil:
@@ -91,7 +101,7 @@ class Struktur:
             print("Anggota tidak ditemukan.")
 
 
-#fungsi utama
+# Fungsi utama program, menampilkan menu dan menangani input user
 def main():
     #contoh
     organisasi = Struktur("Andi")
@@ -137,9 +147,11 @@ def main():
         else:
             print("Pilihan tidak valid!")
 
+# Menyimpan data struktur organisasi ke file (ON PROGRESS)
 def simpan_file():
     ...
 
+# Memuat data struktur organisasi dari file (ON PROGRESS)
 def buka_file():
     ...
 
