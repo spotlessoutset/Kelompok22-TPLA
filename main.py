@@ -1,5 +1,49 @@
 # Class Node
 # Merepresentasikan satu anggota dalam struktur organisasi.
+import json
+
+# Mengubah objek Anggota menjadi dictionary (rekursif)
+def anggota_ke_dict(node):
+    return {
+        "nama": node.nama,
+        "jabatan": node.jabatan,
+        "bawahan": [anggota_ke_dict(b) for b in node.bawahan]
+    }
+
+# Mengubah dictionary kembali menjadi objek Anggota (rekursif)
+def dict_ke_anggota(data):
+    node = Anggota(data["nama"], data["jabatan"])
+    node.bawahan = [dict_ke_anggota(b) for b in data["bawahan"]]
+    return node
+
+# Menyimpan struktur ke file JSON
+def simpan_file(organisasi):
+    if organisasi.root is None:
+        print("Tidak ada data untuk disimpan.")
+        return
+    
+    data = anggota_ke_dict(organisasi.root)
+    
+    try:
+        with open("struktur.json", "w") as file:
+            json.dump(data, file, indent=4)
+        print("Struktur berhasil disimpan ke 'struktur.json'")
+    except Exception as e:
+        print("Terjadi kesalahan saat menyimpan:", e)
+
+# Membuka struktur dari file JSON
+def buka_file(organisasi):
+    try:
+        with open("struktur.json", "r") as file:
+            data = json.load(file)
+        
+        organisasi.root = dict_ke_anggota(data)
+        print("Struktur berhasil dimuat dari 'struktur.json'")
+    except FileNotFoundError:
+        print("File tidak ditemukan!")
+    except Exception as e:
+        print("Terjadi kesalahan saat memuat:", e)
+
 class Anggota:
     # Inisialisasi anggota dengan nama, jabatan, dan list bawahan kosong
     def __init__(self, nama, jabatan):
@@ -139,21 +183,13 @@ def main():
             nama_target = input("Masukkan nama anggota yang ingin dicari: ")
             organisasi.cari_anggota(nama_target)
         elif pilihan == "5":
-            simpan_file()
+            simpan_file(organisasi)
         elif pilihan == "6":
-            buka_file()
+            buka_file(organisasi)
         elif pilihan == "0":
             break
         else:
             print("Pilihan tidak valid!")
-
-# Menyimpan data struktur organisasi ke file (ON PROGRESS)
-def simpan_file():
-    ...
-
-# Memuat data struktur organisasi dari file (ON PROGRESS)
-def buka_file():
-    ...
 
 
 if __name__ == "__main__":
