@@ -1,5 +1,3 @@
-# Class Node
-# Merepresentasikan satu anggota dalam struktur organisasi.
 import json
 
 # Mengubah objek Anggota menjadi dictionary (rekursif)
@@ -44,6 +42,8 @@ def buka_file(organisasi):
     except Exception as e:
         print("Terjadi kesalahan saat memuat:", e)
 
+# Class Node
+# Merepresentasikan satu anggota dalam struktur organisasi.
 class Anggota:
     # Inisialisasi anggota dengan nama, jabatan, dan list bawahan kosong
     def __init__(self, nama, jabatan):
