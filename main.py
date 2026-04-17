@@ -1,3 +1,11 @@
+# =============================================
+# STRUKTUR ORGANISASI KELAS
+# KELOMPOK  : 22
+# CONTRIBUTOR   : 1. Ibra Arifa Istara
+#                 2. Ayyash Syauqi Syahadah
+#                 3. Muhammad Adiyoga Danendra
+# =============================================
+
 import json
 
 # Mengubah objek Anggota menjadi dictionary (rekursif)
@@ -14,6 +22,7 @@ def dict_ke_anggota(data):
     node.bawahan = [dict_ke_anggota(b) for b in data["bawahan"]]
     return node
 
+# 5.
 # Menyimpan struktur ke file JSON
 def simpan_file(organisasi):
     if organisasi.root is None:
@@ -29,6 +38,7 @@ def simpan_file(organisasi):
     except Exception as e:
         print("Terjadi kesalahan saat menyimpan:", e)
 
+# 6.
 # Membuka struktur dari file JSON
 def buka_file(organisasi):
     try:
@@ -61,6 +71,7 @@ class Struktur:
         else:
             self.root = None
 
+    # 1.
     # Menampilkan seluruh struktur organisasi secara rekursif
     def tampilkan_struktur(self, node=None, tingkat=0):
         if self.root is None:
@@ -101,6 +112,7 @@ class Struktur:
                 return hasil
         return None
 
+    # 2.
     # Menambahkan anggota baru sebagai bawahan dari atasan
     def tambah_anggota(self, nama_atasan, nama_baru, jabatan_baru):
         atasan = self.cari_bawahan(self.root, nama_atasan)
@@ -111,6 +123,7 @@ class Struktur:
         else:
             print(f"Gagal: Atasan dengan nama '{nama_atasan}' tidak ditemukan!")
 
+    # 3.
     # Menghapus anggota beserta seluruh bawahannya dari struktur
     def hapus_anggota(self, nama_target):
         if self.root is None:
@@ -128,6 +141,7 @@ class Struktur:
         else:
             print(f"Anggota dengan nama '{nama_target}' tidak ditemukan!")
 
+    # 4.
     # Mencari dan menampilkan detail informasi anggota
     def cari_anggota(self, nama_target):
         hasil = self.cari_bawahan(self.root, nama_target)
