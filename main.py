@@ -23,20 +23,20 @@ def simpan_file(organisasi):
     data = anggota_ke_dict(organisasi.root)
     
     try:
-        with open("struktur.json", "w") as file:
+        with open("data.json", "w") as file:
             json.dump(data, file, indent=4)
-        print("Struktur berhasil disimpan ke 'struktur.json'")
+        print("Struktur berhasil disimpan ke 'data.json'")
     except Exception as e:
         print("Terjadi kesalahan saat menyimpan:", e)
 
 # Membuka struktur dari file JSON
 def buka_file(organisasi):
     try:
-        with open("struktur.json", "r") as file:
+        with open("data.json", "r") as file:
             data = json.load(file)
         
         organisasi.root = dict_ke_anggota(data)
-        print("Struktur berhasil dimuat dari 'struktur.json'")
+        print("Struktur berhasil dimuat dari 'data.json'")
     except FileNotFoundError:
         print("File tidak ditemukan!")
     except Exception as e:
